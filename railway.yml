@@ -1,1 +1,6 @@
+buildCommand: pip install -r requirements.txt --target /workspace
+runCommand: python index.py
+ignore:
+  - .gitignore
+  - README.md
 
