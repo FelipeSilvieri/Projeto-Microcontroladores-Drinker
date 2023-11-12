@@ -2,7 +2,7 @@
 buildCommand = "pip install -r requirements.txt --target /workspace"
 
 # O comando para iniciar o aplicativo
-runCommand = "python index.py"
+startCommand = "python index.py"
 
 # Arquivos a serem ignorados durante o deploy
 ignore = [
