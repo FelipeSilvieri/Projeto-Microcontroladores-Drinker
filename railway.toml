@@ -1,6 +1,11 @@
-buildCommand: pip install -r requirements.txt --target /workspace
-runCommand: python index.py
-ignore:
-  - .gitignore
-  - README.md
-   
+# O comando para construir o aplicativo
+buildCommand = "pip install -r requirements.txt --target /workspace"
+
+# O comando para iniciar o aplicativo
+runCommand = "python index.py"
+
+# Arquivos a serem ignorados durante o deploy
+ignore = [
+  ".gitignore",
+  "README.md"
+]
