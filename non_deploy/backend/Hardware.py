@@ -29,10 +29,10 @@ def on_Message(client, userdata, msg):
     payload =msg.payload.decode("utf-8")
     data = json.loads(payload)
 
-    rele1 = data["rele_pin_a"]
-    rele2 = data["rele_pin_b"]
-    qtd_A = data["qtd_A"]
-    qtd_B = data["qtd_B"]
+    rele1 = int(data["rele_pin_a"])
+    rele2 = int(data["rele_pin_b"])
+    qtd_A = int(data["qtd_A"])
+    qtd_B = int(data["qtd_B"])
 
     make_drink(rele1, rele2, qtd_A, qtd_B)
 
