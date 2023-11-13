@@ -4,6 +4,6 @@ buildCommand = "pip install -r requirements.txt --target /workspace"
 
 [deploy]
 startCommand = "gunicorn index:app"
-healthcheckPath = "/getalldrinks"
+healthcheckPath = "/get-all-drinks"
 healthcheckTimeout = 100
 restartPolicyType = "Never"
