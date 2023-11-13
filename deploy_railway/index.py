@@ -21,19 +21,19 @@ drinks = [
         "dose_B": "Coca",
         "qty_A": 2,
         "qty_B": 2,
-        "img_url": "https://p2.trrsf.com/image/fget/cf/1200/1200/middle/images.terra.com/2013/11/30/cocacoaacucar.jpg",
+        "img_url": "blob:https://mauabr-my.sharepoint.com/d6cc14bd-84c2-4465-947f-078139448269",
         "description": "Muito oba oba"
     },
     {
         "id": 2,
         "bt_id": 1,
         "name": "FantosaGuaraníssima",
-        "price": 20,
+        "price": 15,
         "dose_A": "Fanta",
         "dose_B": "Guarana",
         "qty_A": 2,
         "qty_B": 2,
-        "img_url": "https://p2.trrsf.com/image/fget/cf/1200/1200/middle/images.terra.com/2013/11/30/cocacoaacucar.jpg",
+        "img_url": "blob:https://mauabr-my.sharepoint.com/031ae1fc-ec1c-4d0c-ae21-f24c67375208",
         "description": "Uma explosão de frutas tropicais"
     }
 ]
