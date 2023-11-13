@@ -21,20 +21,20 @@ drinks = [
         "dose_B": "Coca",
         "qty_A": 2,
         "qty_B": 2,
-        "img_url": "blob:https://mauabr-my.sharepoint.com/d6cc14bd-84c2-4465-947f-078139448269",
+        "img_url": "https://io.convertiez.com.br/m/superpaguemenos/shop/products/images/29895/medium/kit-refrigerante-coca-cola-2l-fanta-laranja-2l_75325.png",
         "description": "Muito oba oba"
     },
     {
         "id": 2,
         "bt_id": 1,
-        "name": "FantosaGuaraníssima",
+        "name": "CocosaGuaraníssima",
         "price": 15,
         "dose_A": "Fanta",
         "dose_B": "Guarana",
         "qty_A": 2,
         "qty_B": 2,
-        "img_url": "blob:https://mauabr-my.sharepoint.com/031ae1fc-ec1c-4d0c-ae21-f24c67375208",
-        "description": "Uma explosão de frutas tropicais"
+        "img_url": "https://tdc08h.vteximg.com.br/arquivos/ids/203645-1000-1000/Kit-Refrigerante-Coca---Fanta-Guarana-2l.jpg?v=638043912819830000",
+        "description" : "Uma explosão de frutas tropicais"
     }
 ]
 
