@@ -62,6 +62,9 @@ bottles = [
     },
 ]
 
+@app.route('/teste', methods=['GET'])
+def get_all_drinks():
+    return jsonify(drinks)
 
 @app.route('/get_all_drinks', methods=['GET'])
 def get_all_drinks():
