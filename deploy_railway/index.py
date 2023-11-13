@@ -5,8 +5,6 @@ from flask_cors import CORS
 import time
 
 app = Flask(__name__)
-#app.config['ENV'] = 'development'
-#app.config['DEBUG'] = True
 CORS(app)
 
 doses = ["FANTA", "COCA", "GUARANA", "VODKA"]
@@ -177,6 +175,7 @@ def make_order():
     # outro broker pode ser : test.mosquitto.org
     client.loop_start()
     
+
     try:
         time.sleep(2)
         for _ in range(1):
@@ -186,7 +185,7 @@ def make_order():
                         "qtd_A": qtd_A,
                         "qtd_B": qtd_B
                         }
-            
+   
             jsonOut = json.dumps(jsonData)
             (rc, mid) = client.publish("microcontroladores/t3",jsonOut, 0)
     except:
