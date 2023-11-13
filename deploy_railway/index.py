@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 from flask import Flask, request, jsonify
 import json
 from flask_cors import CORS
+import time
 
 app = Flask(__name__)
 CORS(app)
@@ -150,50 +151,52 @@ def verify_doses():
 def on_publish(client, userdata, mid):
   print("ID Solicitação: "+str(mid))
 
-# @app.route('/make-order', methods=['POST'])
-# def make_order():
-#     dose_A = request.args.get('dose_A').upper()
-#     qtd_A = int(request.args.get('qtd_A'))
-#     dose_B = request.args.get('dose_B').upper()
-#     qtd_B = int(request.args.get('qtd_B'))
-#     rele_pin_a = 0
-#     adc_pin_a = 0
-#     rele_pin_b = 0
-#     adc_pin_b = 0
-#     for bottle in bottles:
-#         if (bottle["drink_name"].upper() == dose_A):
-#             rele_pin_a = int(bottle["rele_pin_number"])
-#             adc_pin_a = int(bottle["moisture_pin_number"])
-#         if (bottle["drink_name"].upper() == dose_B):
-#             rele_pin_b = int(bottle["rele_pin_number"])
-#             adc_pin_b = int(bottle["moisture_pin_number"])
+@app.route('/make-order', methods=['POST'])
+def make_order():
+    dose_A = request.args.get('dose_A').upper()
+    qtd_A = int(request.args.get('qtd_A'))
+    dose_B = request.args.get('dose_B').upper()
+    qtd_B = int(request.args.get('qtd_B'))
+    rele_pin_a = 0
+    adc_pin_a = 0
+    rele_pin_b = 0
+    adc_pin_b = 0
+    for bottle in bottles:
+        if (bottle["drink_name"].upper() == dose_A):
+            rele_pin_a = int(bottle["rele_pin_number"])
+            adc_pin_a = int(bottle["moisture_pin_number"])
+        if (bottle["drink_name"].upper() == dose_B):
+            rele_pin_b = int(bottle["rele_pin_number"])
+            adc_pin_b = int(bottle["moisture_pin_number"])
 
-#     client = mqtt.Client()            
-#     client.on_publish = on_publish
-#     client.connect("broker.hivemq.com",1883)
-#     # outro broker pode ser : test.mosquitto.org
-#     client.loop_start()
+    client = mqtt.Client()            
+    client.on_publish = on_publish
+    client.connect("broker.hivemq.com",1883)
+    # outro broker pode ser : test.mosquitto.org
+    client.loop_start()
     
-#     try:
-#         for _ in range(1):
-#             jsonData = {
-#                         "rele_pin_a": rele_pin_a,
-#                         "rele_pin_b": rele_pin_b,
-#                         "qtd_A": qtd_A,
-#                         "qtd_B": qtd_B
-#                         }
-            
-#             jsonOut = json.dumps(jsonData)
-#             (rc, mid) = client.publish("microcontroladores/t3",jsonOut, 0)
-#     except:
-#         print('Byebye')
-    
-#     client.disconnect()
 
-#     if (rele_pin_a == 0 and adc_pin_a == 0 and rele_pin_b == 0 and adc_pin_b == 0):
-#         return jsonify("Erro ao realizar a bebida"), 400
-#     else:
-#         return jsonify("Sucesso"), 200
+    try:
+        time.sleep(2)
+        for _ in range(1):
+            jsonData = {
+                        "rele_pin_a": rele_pin_a,
+                        "rele_pin_b": rele_pin_b,
+                        "qtd_A": qtd_A,
+                        "qtd_B": qtd_B
+                        }
+   
+            jsonOut = json.dumps(jsonData)
+            (rc, mid) = client.publish("microcontroladores/t3",jsonOut, 0)
+    except:
+        print('Byebye')
+    
+    client.disconnect()
+
+    if (rele_pin_a == 0 and adc_pin_a == 0 and rele_pin_b == 0 and adc_pin_b == 0):
+        return jsonify("Erro ao realizar a bebida"), 400
+    else:
+        return jsonify("Sucesso"), 200
 
   
 if __name__ == '__main__':

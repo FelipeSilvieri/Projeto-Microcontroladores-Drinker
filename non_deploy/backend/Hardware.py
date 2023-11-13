@@ -1,75 +1,54 @@
-import RPi.GPIO as gpio
+# import RPi.GPIO as gpio
 from time import sleep
 import time
+import paho.mqtt.client as mqtt
+import sys
+import json
+     
 
+def rele_on(rele):
+    gpio.output(rele, gpio.LOW)
 
-class Hardware():
+def rele_off(rele):
+    gpio.output(rele, gpio.HIGH)
 
-    def __init__(self, rele1, rele2, adc1, adc2, dose_A, dose_B):
-        gpio.setmode(gpio.BCM)
-        self.rele1 = rele1
-        self.rele2 = rele2
-        gpio.setup(rele1, gpio.OUT)
-        gpio.setup(rele2, gpio.OUT)
-        
-        self.adc1 = adc1
-        self.adc2 = adc2
-        gpio.setup(adc1, gpio.IN)
-        gpio.setup(adc2, gpio.IN)
-        
-        self.qtd_A = dose_A
-        self.qtd_B = dose_B
+def rele_off_general(rele1, rele2):
+    rele_off(rele1)
+    rele_off(rele2)
 
-        self.rele_off_general()
-        
+def make_drink(rele1, rele2, qtd_A, qtd_B):
+    rele_on(rele1)
+    time.sleep(2*qtd_A)
+    rele_off(rele1)
+    rele_on(rele2)
+    time.sleep(2*qtd_B)
+    rele_off(rele2)
+    gpio.cleanup()
 
-    def rele_on(self, rele):
-        #rele.off()
-        gpio.output(rele, gpio.LOW)
+def on_Message(client, userdata, msg):
+    payload =msg.payload.decode("utf-8")
+    data = json.loads(payload)
 
-    def rele_off(self, rele):
-        #rele.on()
-        gpio.output(rele, gpio.HIGH)
+    rele1 = int(data["rele_pin_a"])
+    rele2 = int(data["rele_pin_b"])
+    qtd_A = int(data["qtd_A"])
+    qtd_B = int(data["qtd_B"])
 
-    def rele_off_general(self):
-        self.rele_off(self.rele1)
-        self.rele_off(self.rele2)
+    make_drink(rele1, rele2, qtd_A, qtd_B)
 
-    def conversion_factor(self, value):
-        return round((65535/(value) * 100) - 100)
+client = mqtt.Client()
+client.on_message = on_Message
 
-    def activate_bomb(self, rele):
-        self.rele_on(rele)
+if client.connect("broker.hivemq.com",1883,60)!=0:
+  print("cannot connect")
+  sys.exit(-1)
 
-    def deactivate_bomb(self, rele_number, adc):
-        start_time = time.time()
-        actual_time = time.time()
-        moisture = gpio.input(adc)
+client.subscribe('microcontroladores/t3',0)
 
-        while ((self.conversion_factor(moisture) >= 45) and (time.time() - start_time < 5)):
-            moisture = gpio.input(adc)
-            actual_time = time.time()
+try:
+  print("Conectado ao MQTT Broker...")
+  client.loop_forever()
+except:
+  print("Desconectando do MQTT Broker...")
 
-        self.rele_off(rele_number)
-
-        if (time.time() - start_time < 5):
-            return False
-
-        return True
-
-    def make_drink(self):
-        #self.activate_bomb(self.rele1)
-        #self.activate_bomb(self.rele2)
-        self.rele_on(self.rele1)
-        time.sleep(2*self.qtd_A)
-        self.rele_off(self.rele1)
-        self.rele_on(self.rele2)
-        time.sleep(2*self.qtd_B)
-        self.rele_off(self.rele2)
-        #self.deactivate_bomb(self.rele1, self.adc1)
-        #self.deactivate_bomb(self.rele2, self.adc2)
-        #if self.deactivate_bomb(self.rele1, self.adc1):
-        #    sleep(0.5)
-        #     self.activate_bomb(self.rele2)
-        #    self.deactivate_bomb(self.rele2, self.adc2)
-        gpio.cleanup()
+client.disconnect()
