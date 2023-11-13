@@ -4,8 +4,6 @@ import json
 from flask_cors import CORS
 
 app = Flask(__name__)
-#app.config['ENV'] = 'development'
-#app.config['DEBUG'] = True
 CORS(app)
 
 doses = ["FANTA", "COCA", "GUARANA", "VODKA"]
