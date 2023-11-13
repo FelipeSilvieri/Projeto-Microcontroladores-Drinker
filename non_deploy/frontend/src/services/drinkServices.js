@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-const _apiBaseUrl = 'http://127.0.0.1:5000/';
+const _apiBaseUrl = 'https://microcontroladores-t2-t3-production.up.railway.app/';
 
 export const getAllDrinks = async () => {
-    const _endpoint = 'get_all_drinks';
+    const _endpoint = 'get-all-drinks';
 
     try {
         const response = await axios.get(_apiBaseUrl + _endpoint);
@@ -22,7 +22,7 @@ export const getAllDrinks = async () => {
 };
 
 export const getDetailById = async (id) => {
-    const _endpoint = `get_detail_by_id?id=${id}`;
+    const _endpoint = `get-detail-by-id?id=${id}`;
 
     try {
         const response = await axios.get(_apiBaseUrl + _endpoint);

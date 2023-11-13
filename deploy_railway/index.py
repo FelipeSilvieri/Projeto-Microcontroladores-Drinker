@@ -66,7 +66,7 @@ bottles = [
 def get_all_drinks():
     return jsonify(drinks)
 
-@app.route('/get_all_by_bt_id', methods=['GET'])
+@app.route('/get-all-by-bt-id', methods=['GET'])
 def get_all_by_bt_id():
     bt_id = request.args.get('bt_id')
 
@@ -85,7 +85,7 @@ def get_all_by_bt_id():
         return jsonify({"error": "Nenhuma bebida encontrada com o bt_id fornecido"}), 404
 
 
-@app.route('/get_detail_by_id', methods=['GET'])
+@app.route('/get-detail-by-id', methods=['GET'])
 def get_detail_by_id():
     id = request.args.get('id')
     drinks_same_id = [drink for drink in drinks if drink["id"] == int(id)]
@@ -97,7 +97,7 @@ def get_detail_by_id():
         return jsonify({"error": "Nenhuma bebida encontrada com o id fornecido"}), 404
 
 
-@app.route('/create_drink', methods=['POST'])
+@app.route('/create-drink', methods=['POST'])
 def create_drink():
     data = request.get_json()
     new_drink = {
@@ -117,7 +117,7 @@ def create_drink():
     return jsonify({"message": "Bebida criada com sucesso"}), 201
 
 
-@app.route('/verify_drink', methods=['GET'])
+@app.route('/verify-drink', methods=['GET'])
 def verify_drink():
     id = request.args.get('id')
     drink = next((d for d in drinks if d["id"] == int(id)), None)
