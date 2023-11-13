@@ -2,6 +2,7 @@ import paho.mqtt.client as mqtt
 from flask import Flask, request, jsonify
 import json
 from flask_cors import CORS
+import time
 
 app = Flask(__name__)
 #app.config['ENV'] = 'development'
@@ -177,6 +178,7 @@ def make_order():
     client.loop_start()
     
     try:
+        time.sleep(2)
         for _ in range(1):
             jsonData = {
                         "rele_pin_a": rele_pin_a,
