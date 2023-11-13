@@ -4,6 +4,6 @@ buildCommand = "pip install -r requirements.txt --target /workspace"
 
 [deploy]
 startCommand = "python index.py"
-healthcheckPath = "/get-all-drinks"
+healthcheckPath = "/get_all_drinks"
 healthcheckTimeout = 100
 restartPolicyType = "Never"
