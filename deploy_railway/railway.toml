@@ -1,11 +1,9 @@
-# O comando para construir o aplicativo
+[build]
+builder = "nixpacks"
 buildCommand = "pip install -r requirements.txt --target /workspace"
 
-# O comando para iniciar o aplicativo
+[deploy]
 startCommand = "python index.py"
-
-# Arquivos a serem ignorados durante o deploy
-ignore = [
-  ".gitignore",
-  "README.md"
-]
+healthcheckPath = "/"
+healthcheckTimeout = 100
+restartPolicyType = "never"
