@@ -25,6 +25,7 @@ O funcionamento descrito acima pode ser observado de forma mais detalhada no dia
 Caso os vídeos não estejam sendo exibidos, estão na pasta *assets/t2_video1.mp4* e *assets/t2_video2.mp4*
 
 https://github.com/FelipeSilvieri/microcontroladores-t2-t3/assets/100360420/28301086-6d38-4787-9abf-688b1b678603
+
 https://github.com/FelipeSilvieri/microcontroladores-t2-t3/assets/100360420/c3f6a53f-c146-43d3-af8c-1d65a7860371
 
 # ENTREGA T3
